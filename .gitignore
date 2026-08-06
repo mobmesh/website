@@ -1,0 +1,11 @@
+dist/
+node_modules/
+.astro/
+.netlify/
+.env
+.env.production
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/
+.idea/
