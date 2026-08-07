@@ -5,12 +5,26 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Server-side proxy for the Explorer's public JSON. status = 200 rewrites rather
+# than redirects, so the browser sees a same-origin request and CORS never applies.
+[[redirects]]
+  from = "/gcm-api/*"
+  to = "https://explorer.gulfcoastmesh.org/:splat"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), payment=(), usb=(), midi=(), interest-cohort=()"
+
+# One upstream fetch per 5 minutes regardless of visitor count.
+[[headers]]
+  for = "/gcm-api/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
 
 [[headers]]
   for = "/_astro/*"
