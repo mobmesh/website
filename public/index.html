@@ -88,24 +88,9 @@
       }
 
       .brand-badge {
-        display: grid;
-        place-items: center;
+        display: block;
         width: 1.9rem;
         height: 1.9rem;
-        border-radius: 0.55rem;
-        background: var(--accent-soft);
-        border: 1px solid var(--line);
-        color: var(--accent);
-      }
-
-      .brand-badge svg {
-        width: 0.9rem;
-        height: 0.9rem;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
       }
 
       .brand-name {
@@ -747,11 +732,7 @@
     <header class="site-header">
       <div class="site-header-inner">
         <a class="brand" href="/">
-          <span class="brand-badge" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" />
-            </svg>
-          </span>
+          <img class="brand-badge" src="/favicon.svg" alt="" width="64" height="64" />
           <span class="brand-name">MobMesh</span>
         </a>
         <nav class="site-nav">

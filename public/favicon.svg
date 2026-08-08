@@ -7,8 +7,11 @@
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="14" fill="url(#g)"/>
-  <g transform="translate(5.7929,5.8457) scale(0.13143)">
-    <g transform="translate(0.000000,400.000000) scale(0.100000,-0.100000)"
+  <!-- Glyph widened 1.14x about the frame centre: at 1.0 it filled 54% of the
+       width against 78% of the height, which read as narrow in the header. -->
+  <g transform="translate(32,0) scale(1.14,1) translate(-32,0)">
+    <g transform="translate(5.7929,5.8457) scale(0.13143)">
+      <g transform="translate(0.000000,400.000000) scale(0.100000,-0.100000)"
 fill="#03080f" stroke="none">
 <path d="M920 2475 c0 -707 3 -1285 6 -1285 3 0 29 19 57 43 149 125 317 163
 495 111 l22 -6 0 497 0 496 245 -245 c135 -135 250 -246 255 -246 5 0 120 111
@@ -35,6 +38,7 @@ fill="#03080f" stroke="none">
 -96 17 -81 17 -178 -2z"/>
 <path d="M1765 1164 c-27 -29 -32 -72 -14 -106 21 -39 67 -48 249 -48 182 0
 228 9 249 48 18 34 13 77 -14 106 l-24 26 -211 0 -211 0 -24 -26z"/>
-</g>
+      </g>
+    </g>
   </g>
 </svg>
