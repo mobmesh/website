@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap"
       rel="stylesheet"
     />
-    <!-- Self-contained: lives in public/, so it ships unprocessed. Tokens mirror global.css. -->
     <style>
       :root {
         --bg-0: #03080f;
@@ -61,10 +60,6 @@
         padding: 3rem 1.25rem 3rem;
       }
 
-      /* ---- Site header ---------------------------------------------------- */
-
-      /* Sits over the backdrop rather than above it, so the image still starts at
-         the very top of the page. */
       .site-header {
         position: relative;
         z-index: 2;
@@ -127,26 +122,15 @@
         }
       }
 
-      /* ---- Hero ---------------------------------------------------------- */
-
-      /* The backdrop is its own layer, absolutely positioned and anchored to the
-         top of the page. Its height is therefore free of the content flow: the
-         image can run deep behind the intro without pushing anything down. */
       .page-bg {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        /* The framing is baked into the file, so the layer only has to track its
-           aspect ratio -- height follows width and the composition never shifts.
-           1600/302 puts it at 380px on a ~2014px window, matching the reference. */
         aspect-ratio: 1600 / 302;
         z-index: 0;
         pointer-events: none;
         opacity: 0.6;
-        /* Fade the whole layer to transparent rather than terminating the scrim
-           in an opaque colour -- body's gradient has drifted off --bg-0 by this
-           height, and matching it exactly left a visible hairline. */
         -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 56%, rgba(0, 0, 0, 0) 100%);
         mask-image: linear-gradient(180deg, #000 0%, #000 56%, rgba(0, 0, 0, 0) 100%);
       }
@@ -158,8 +142,6 @@
         inset: 0;
       }
 
-      /* 100% width rather than cover, so the whole coast from Louisiana to the
-         Florida panhandle stays in frame; only the vertical is cropped. */
       .page-bg::before {
         background: url("/hero-band.webp") center center / cover no-repeat;
         background-color: var(--bg-0);
@@ -168,8 +150,6 @@
 
       .page-bg::after {
         background:
-          /* Clearest around Mobile Bay, falling away harder to the right than the
-             left, since the left half carries the headline and the right is bare. */
           linear-gradient(90deg,
             rgba(3, 8, 15, 0.93) 0%,
             rgba(3, 8, 15, 0.64) 22%,
@@ -221,8 +201,6 @@
         margin: 0 0 1.75rem;
       }
 
-      /* Summary of the paragraph above, so it stays with the copy -- but given
-         the page's pill treatment so it reads as an element, not a stray line. */
       .hero-tags {
         display: flex;
         flex-wrap: wrap;
@@ -244,10 +222,6 @@
         padding: 0.36rem 0.8rem;
       }
 
-      /* ---- Stat panel ---------------------------------------------------- */
-
-      /* One surface with internal dividers rather than four bordered cards --
-         far less border noise for the same four numbers. */
       .stats {
         background: var(--bg-elevated);
         border: 1px solid var(--line);
@@ -271,8 +245,6 @@
         padding: 1.15rem 1.25rem 1.25rem;
       }
 
-      /* Dividers drawn as borders on the cells so they vanish cleanly when the
-         grid wraps to two columns. */
       .stat + .stat {
         border-left: 1px solid var(--line);
       }
@@ -342,8 +314,6 @@
       .stats-bar a:hover {
         text-decoration: underline;
       }
-
-      /* ---- Map card ------------------------------------------------------ */
 
       .card {
         background: var(--bg-elevated);
@@ -493,8 +463,6 @@
         border: 0;
       }
 
-      /* ---- Link card ----------------------------------------------------- */
-
       .link-card {
         display: flex;
         align-items: center;
@@ -550,8 +518,6 @@
         color: var(--accent);
       }
 
-      /* ---- Footer: credit to Gulf Coast Mesh ----------------------------- */
-
       footer {
         color: var(--fg-muted);
         font-size: 0.82rem;
@@ -603,7 +569,6 @@
         stroke-linejoin: round;
       }
 
-      /* CSS beats the inline fill attribute, so refill the node dots. */
       .gcm-mark-badge svg circle {
         fill: currentColor;
       }
@@ -724,9 +689,12 @@
         font-size: 0.75rem;
         text-align: center;
       }
+
     </style>
+    <link rel="stylesheet" href="/mesh-bg.css" />
   </head>
   <body>
+    <canvas id="mesh-canvas" aria-hidden="true"></canvas>
     <div class="page-bg" aria-hidden="true"></div>
 
     <header class="site-header">
@@ -765,7 +733,6 @@
           community building, and resilient communication.
         </p>
 
-      <!-- Populated from the Explorer API; hidden entirely if it can't be read. -->
       <section class="stats" id="stats" aria-label="Network statistics" hidden>
         <div class="stats-row">
           <div class="stat">
@@ -795,9 +762,6 @@
         </p>
       </section>
 
-      <!-- /embed-dark hides the HUD and side panels via embed-mode CSS.
-           autofit=false keeps our view; passing lat/lon alone also suppresses
-           the refit now. node_radius trims the markers at this zoom. -->
       <figure class="card" style="margin: 0 0 1.75rem">
         <figcaption class="card-head">
           <span class="card-icon" aria-hidden="true">
@@ -908,8 +872,8 @@
     </div>
 
     <script>
-      const API = "/gcm-api"; // proxied server-side; see netlify.toml + astro.config.mjs
-      const REFRESH_MS = 300000; // matches the Explorer's own 5-minute window
+      const API = "/gcm-api";
+      const REFRESH_MS = 300000;
       const ACTIVE_WINDOW_S = 86400;
       const ONLINE_WINDOW_S = 300;
 
@@ -929,7 +893,6 @@
         const nodesJson = await nodesRes.json();
         const stats = await statsRes.json();
         const nodes = Array.isArray(nodesJson.data) ? nodesJson.data : [];
-        // Their clock, not ours -- a skewed local clock would distort the windows.
         const now = nodesJson.server_time ?? Date.now() / 1000;
 
         let repeaters = 0;
@@ -963,7 +926,6 @@
       }
 
       function refresh() {
-        // Stays hidden while CORS blocks the read, rather than showing a row of dashes.
         loadStats().catch(() => {
           document.getElementById("stats").hidden = true;
         });
@@ -972,5 +934,7 @@
       refresh();
       setInterval(refresh, REFRESH_MS);
     </script>
+
+    <script src="/mesh-bg.js"></script>
   </body>
 </html>
