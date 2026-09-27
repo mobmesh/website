@@ -198,7 +198,35 @@
       .hero-body {
         color: var(--fg-muted);
         line-height: 1.65;
+        margin: 0 0 1.25rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
         margin: 0 0 1.75rem;
+      }
+
+      .hero-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius-full);
+        padding: 0.65rem 1.1rem;
+        color: var(--bg-0);
+        background: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      }
+
+      .hero-action:hover {
+        background: var(--accent-strong);
+        border-color: var(--accent-strong);
       }
 
       .hero-tags {
@@ -732,6 +760,9 @@
           like phones and tablets. Our network is designed for emergency preparedness,
           community building, and resilient communication.
         </p>
+        <div class="hero-actions" aria-label="Get started">
+          <a class="hero-action" href="https://tools.mobmesh.org/">Get started</a>
+        </div>
 
       <section class="stats" id="stats" aria-label="Network statistics" hidden>
         <div class="stats-row">
