@@ -74,4 +74,6 @@ function animateMesh() {
   requestAnimationFrame(animateMesh);
 }
 
-animateMesh();
+// Phones (touch and narrow) never run the animated background, sparing battery.
+if (matchMedia("(pointer: coarse)").matches && matchMedia("(max-width: 700px)").matches) meshCanvas.hidden = true;
+else animateMesh();
