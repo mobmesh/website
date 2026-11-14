@@ -72,69 +72,6 @@
         padding: 3rem 1.25rem 3rem;
       }
 
-      .site-header {
-        position: relative;
-        z-index: 2;
-      }
-
-      .site-header-inner {
-        width: clamp(320px, 94%, 960px);
-        margin: 0 auto;
-        padding: 1.15rem 1.25rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        text-decoration: none;
-      }
-
-      .brand-badge {
-        display: block;
-        width: 1.9rem;
-        height: 1.9rem;
-      }
-
-      .brand-name {
-        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--fg);
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: 1.4rem;
-        font-size: 0.82rem;
-      }
-
-      .site-nav a {
-        color: var(--fg-muted);
-        text-decoration: none;
-        transition: color 0.15s ease;
-        white-space: nowrap;
-      }
-
-      .site-nav a:hover {
-        color: var(--accent);
-      }
-
-
-      @media (max-width: 560px) {
-        .site-nav {
-          gap: 1rem;
-          font-size: 0.78rem;
-        }
-      }
-
       .page-bg {
         position: absolute;
         top: 0;
@@ -720,20 +657,8 @@
     <canvas id="mesh-canvas" aria-hidden="true"></canvas>
     <div class="page-bg" aria-hidden="true"></div>
 
-    <header class="site-header">
-      <div class="site-header-inner">
-        <a class="brand" href="/">
-          <img class="brand-badge" src="/favicon.svg" alt="" width="64" height="64" />
-          <span class="brand-name">MobMesh</span>
-        </a>
-        <nav class="site-nav">
-          <a href="https://tools.mobmesh.org/">Tools</a>
-          <a href="https://analyzer.gulfcoastmesh.org/?theme=dark#/live?lat=30.6954&amp;lon=-88.0399&amp;zoom=9&amp;layer=dark" target="_blank" rel="noopener noreferrer">Live map</a>
-          <a href="https://github.com/mobmesh" target="_blank" rel="noopener noreferrer">Source</a>
-          <a href="https://discord.com/channels/1559225096915263511/1559238699433197709" target="_blank" rel="noopener noreferrer">Discord</a>
-        </nav>
-      </div>
-    </header>
+    <mm-header current="home"></mm-header>
+    <script src="https://tools.mobmesh.org/shared/site-header.js"></script>
 
     <section class="hero">
         <div class="hero-inner">

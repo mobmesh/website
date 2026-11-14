@@ -12,6 +12,13 @@
   to = "https://explorer.gulfcoastmesh.org/:splat"
   status = 200
 
+# Stable Discord link for the app and pages; only the invite here changes if it is replaced.
+[[redirects]]
+  from = "/discord"
+  to = "https://discord.gg/gGQWQM6SfW"
+  status = 302
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
